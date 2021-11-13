@@ -15,17 +15,18 @@ function makePac() {
   let position = setToRandom(200);
 
   // Add image to div id = game
-  let game = document.getElementById('game');
-  let newimg = document.createElement('img');
-  newimg.style.position = 'absolute';
-  newimg.src = './images/PacMan1.png';
+  let game = document.getElementById("game");
+  let newimg = document.createElement("img");
+  newimg.style.position = "absolute";
+  newimg.src = "./images/PacMan1.png";
   newimg.width = 100;
 
   // TODO: set position here
-
+  newimg.style.left = position.x;
+  newimg.style.top = position.y;
 
   // TODO add new Child image to game
-  game.appendChild(/* TODO: add parameter */);
+  game.appendChild(newimg);
 
   // return details in an object
   return {
@@ -49,8 +50,15 @@ function update() {
 }
 
 function checkCollisions(item) {
+  var w = window.innerWidth -100;
+  var h = window.innerHeight -100;
   // TODO: detect collision with all walls and make pacman bounce
-  
+  if (item.position.x < 0 || item.position.x > w) {
+    item.velocity.x *= -1;
+  }
+  if (item.position.y < 0 || item.position.y > h) {
+    item.velocity.y *= -1;
+  }
 }
 
 function makeOne() {
@@ -58,6 +66,6 @@ function makeOne() {
 }
 
 //don't change this line
-if (typeof module !== 'undefined') {
+if (typeof module !== "undefined") {
   module.exports = { checkCollisions, update, pacMen };
 }
